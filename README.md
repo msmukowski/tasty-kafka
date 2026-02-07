@@ -44,6 +44,26 @@ docker exec -it kafka /opt/kafka/bin/kafka-console-consumer.sh \
   --from-beginning
 ```
 
+## Services
+
+### log-producer
+
+A Python producer that generates fake log events and sends them to the `logs.raw` topic.
+Uses `confluent-kafka` and `pydantic`.
+
+```bash
+cd services/log-producer
+pip install -e .
+python src/main.py
+```
+
+Verify with the console consumer:
+
+```bash
+docker exec -it kafka /opt/kafka/bin/kafka-console-consumer.sh \
+  --topic logs.raw --bootstrap-server localhost:9092 --from-beginning
+```
+
 ## Stopping
 
 ```bash
